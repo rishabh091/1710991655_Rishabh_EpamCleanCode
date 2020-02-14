@@ -1,4 +1,4 @@
-package org.example;
+package org.example.areaQuestion;
 
 public class InvalidMaterialSelect extends Exception {
 

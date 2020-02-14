@@ -1,4 +1,4 @@
-package org.example;
+package org.example.areaQuestion;
 
 import java.util.Scanner;
 
