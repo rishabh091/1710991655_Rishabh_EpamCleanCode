@@ -1,10 +1,14 @@
 package org.example.areaQuestion;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+
 import java.util.Scanner;
 
 public class App
 {
     private static Scanner io=new Scanner(System.in);
+    public static final Logger logger= (Logger) LogManager.getLogger();
 
     public static void main( String[] args )
     {
@@ -12,23 +16,23 @@ public class App
         String material;
         boolean automation = false;
 
-        System.out.println("Enter area : ");
+        logger.info("Enter area : ");
         area = io.nextDouble();
 
-        System.out.println("Choose Material : ");
+        logger.info("Enter material type : ");
         material = getMaterialType();
 
         if(material.toLowerCase().equals(Standards.highStandardMaterials.toString().toLowerCase())){
-            System.out.println("Select automation (true/false) : ");
+            logger.info("Select automation (true/false) : ");
             automation = io.nextBoolean();
         }
 
         CalculateInterest calculateInterest = new CalculateInterest();
         try{
-            System.out.println(calculateInterest.getInterest(area,material,automation));
+            logger.info("Cost is : {}",calculateInterest.getInterest(area,material,automation));
         }
         catch (InvalidMaterialSelect e){
-            System.err.println(e);
+            logger.error(e.getMessage());
         }
 
         io.close();
@@ -37,9 +41,9 @@ public class App
     private static String getMaterialType(){
         Standards[] standards = Standards.values();
         for(Standards s: standards){
-            System.out.println("Type '" + s + "' for " + s);
+            logger.info("Type '" + s + "' for " + s);
         }
-        System.out.println("Input : ");
+        logger.info("Input : ");
         String material = io.next();
 
         return material;
